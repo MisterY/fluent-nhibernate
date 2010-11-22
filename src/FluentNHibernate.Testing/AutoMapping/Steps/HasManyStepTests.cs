@@ -6,7 +6,8 @@ using FluentNHibernate.Automapping.Steps;
 using FluentNHibernate.MappingModel.ClassBased;
 using FluentNHibernate.MappingModel.Collections;
 using FluentNHibernate.Utils.Reflection;
-using Iesi.Collections.Generic;
+
+// using Iesi.Collections.Generic;
 using NUnit.Framework;
 
 namespace FluentNHibernate.Testing.AutoMapping.Steps
@@ -103,11 +104,17 @@ namespace FluentNHibernate.Testing.AutoMapping.Steps
         protected class PropertyTarget
         {
             public ISet<PropertyTarget> Set { get; set; }
+
             public HashSet<PropertyTarget> HashSet { get; set; }
+
             public IList<PropertyTarget> List { get; set; }
+
             public int Int { get; set; }
+
             public string String { get; set; }
+
             public System.DateTime DateTime { get; set; }
+
             public PropertyTarget Entity { get; set; }
         }
     }

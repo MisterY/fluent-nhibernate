@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Iesi.Collections.Generic;
+﻿// using Iesi.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace FluentNHibernate.Testing.DomainModel.Access
 {
     class ParentModel
     {
-
         public virtual int Id { get; private set; }
 
         public long Version { get; private set; }

@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FluentNHibernate.Utils;
 using Iesi.Collections;
 using Iesi.Collections.Generic;
-using FluentNHibernate.Utils;
 
 namespace FluentNHibernate.Testing.Values
 {
@@ -36,7 +36,7 @@ namespace FluentNHibernate.Testing.Values
                     // on the user to pass in the correct collection type (especially if they're using
                     // an interface). I've tried to create the common ones, but I'm sure this won't be
                     // infallible.
-                    if (propertyAccessor.PropertyType.IsAssignableFrom(typeof(ISet<TListElement>)))
+                    if (propertyAccessor.PropertyType.IsAssignableFrom(typeof(System.Collections.Generic.ISet<TListElement>)))
                     {
                         collection = new HashedSet<TListElement>(Expected.ToList());
                     }

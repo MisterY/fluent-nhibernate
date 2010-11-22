@@ -19,10 +19,10 @@ namespace FluentNHibernate.Testing.Testing.Values
 
         public override void establish_context()
         {
-            property = ReflectionHelper.GetAccessor (GetPropertyExpression ());
+            property = ReflectionHelper.GetAccessor(GetPropertyExpression());
             target = new ListEntity();
 
-            listItems = new[] {"foo", "bar", "baz"};
+            listItems = new[] { "foo", "bar", "baz" };
             sut = new List<ListEntity, string>(property, listItems);
         }
 
@@ -278,7 +278,7 @@ namespace FluentNHibernate.Testing.Testing.Values
             property = ReflectionHelper.GetAccessor((Expression<Func<ListEntity, IEnumerable<string>>>)(x => x.GetterAndSetter));
             target = new ListEntity();
 
-            sut = new List<ListEntity, string>(property, new[] {"foo", "bar", "baz"});
+            sut = new List<ListEntity, string>(property, new[] { "foo", "bar", "baz" });
         }
     }
 
@@ -288,7 +288,7 @@ namespace FluentNHibernate.Testing.Testing.Values
         public override void establish_context()
         {
             base.establish_context();
-            target.GetterAndSetter = new[] {"foo", "bar", "baz"};
+            target.GetterAndSetter = new[] { "foo", "bar", "baz" };
         }
 
         public override void because()
@@ -309,7 +309,7 @@ namespace FluentNHibernate.Testing.Testing.Values
         public override void establish_context()
         {
             base.establish_context();
-            target.GetterAndSetter = new[] {"baz", "bar", "foo"};
+            target.GetterAndSetter = new[] { "baz", "bar", "foo" };
         }
 
         public override void because()
@@ -337,7 +337,7 @@ namespace FluentNHibernate.Testing.Testing.Values
         public override void establish_context()
         {
             base.establish_context();
-            target.GetterAndSetter = new[] {"foo"};
+            target.GetterAndSetter = new[] { "foo" };
         }
 
         public override void because()
@@ -475,7 +475,7 @@ namespace FluentNHibernate.Testing.Testing.Values
         public override void establish_context()
         {
             base.establish_context();
-            target.GetterAndSetter = new[] {"foo", "bar", "baz"};
+            target.GetterAndSetter = new[] { "foo", "bar", "baz" };
 
             exception = new InvalidOperationException();
 
@@ -506,9 +506,12 @@ namespace FluentNHibernate.Testing.Testing.Values
             property = ReflectionHelper.GetAccessor((Expression<Func<ListEntity, IEnumerable<string>>>)(x => x.TypedSet));
             target = new ListEntity();
 
-            sut = new List<ListEntity, string>(property, new[] {"foo", "bar", "baz"});
+            sut = new List<ListEntity, string>(property, new[] { "foo", "bar", "baz" });
 
-            target.TypedSet.AddAll(new[] {"foo", "bar", "baz"});
+            // target.TypedSet.AddAll(new[] {"foo", "bar", "baz"});
+            target.TypedSet.Add("foo");
+            target.TypedSet.Add("bar");
+            target.TypedSet.Add("baz");
         }
 
         public override void because()
@@ -531,9 +534,9 @@ namespace FluentNHibernate.Testing.Testing.Values
             property = ReflectionHelper.GetAccessor((Expression<Func<ListEntity, IEnumerable>>)(x => x.Set));
             target = new ListEntity();
 
-            sut = new List<ListEntity, string>(property, new[] {"foo", "bar", "baz"});
+            sut = new List<ListEntity, string>(property, new[] { "foo", "bar", "baz" });
 
-            target.Set.AddAll(new[] {"foo", "bar", "baz"});
+            target.Set.AddAll(new[] { "foo", "bar", "baz" });
         }
 
         public override void because()
@@ -556,9 +559,9 @@ namespace FluentNHibernate.Testing.Testing.Values
             property = ReflectionHelper.GetAccessor((Expression<Func<ListEntity, IEnumerable>>)(x => x.Collection));
             target = new ListEntity();
 
-            sut = new List<ListEntity, string>(property, new[] {"foo", "bar", "baz"});
+            sut = new List<ListEntity, string>(property, new[] { "foo", "bar", "baz" });
 
-            target.Collection = new List<string> {"foo", "bar", "baz"};
+            target.Collection = new List<string> { "foo", "bar", "baz" };
         }
 
         public override void because()
@@ -581,9 +584,9 @@ namespace FluentNHibernate.Testing.Testing.Values
             property = ReflectionHelper.GetAccessor((Expression<Func<ListEntity, IEnumerable>>)(x => x.List));
             target = new ListEntity();
 
-            sut = new List<ListEntity, string>(property, new[] {"foo", "bar", "baz"});
+            sut = new List<ListEntity, string>(property, new[] { "foo", "bar", "baz" });
 
-            target.List = new List<string> {"foo", "bar", "baz"};
+            target.List = new List<string> { "foo", "bar", "baz" };
         }
 
         public override void because()
@@ -606,9 +609,9 @@ namespace FluentNHibernate.Testing.Testing.Values
             property = ReflectionHelper.GetAccessor((Expression<Func<ListEntity, IEnumerable<string>>>)(x => x.Array));
             target = new ListEntity();
 
-            sut = new List<ListEntity, string>(property, new[] {"foo", "bar", "baz"});
+            sut = new List<ListEntity, string>(property, new[] { "foo", "bar", "baz" });
 
-            target.Array = new[] {"foo", "bar", "baz"};
+            target.Array = new[] { "foo", "bar", "baz" };
         }
 
         public override void because()

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Iesi.Collections.Generic;
+﻿using System.Collections.Generic;
+// using Iesi.Collections.Generic;
 
 namespace FluentNHibernate.Specs.FluentInterface.Fixtures
 {

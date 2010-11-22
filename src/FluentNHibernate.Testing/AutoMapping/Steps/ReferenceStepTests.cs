@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Steps;
-using FluentNHibernate.Testing.Automapping;
 using FluentNHibernate.Utils.Reflection;
-using Iesi.Collections.Generic;
+// using Iesi.Collections.Generic;
 using NUnit.Framework;
 
 namespace FluentNHibernate.Testing.AutoMapping.Steps

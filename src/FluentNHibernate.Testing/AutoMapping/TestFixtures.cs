@@ -1,17 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Data;
 using System.Drawing;
 using FluentNHibernate.Automapping.TestFixtures.ComponentTypes;
 using FluentNHibernate.Automapping.TestFixtures.CustomCompositeTypes;
 using FluentNHibernate.Automapping.TestFixtures.CustomTypes;
+using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
 using FluentNHibernate.Conventions.Instances;
-using FluentNHibernate.Mapping;
-using FluentNHibernate.Conventions;
-using Iesi.Collections.Generic;
 using NHibernate;
 using NHibernate.Engine;
 using NHibernate.SqlTypes;
@@ -27,7 +25,6 @@ namespace FluentNHibernate.Automapping.TestFixtures
 
     public class ClassThatInheritsIdFromParentWithPrivateSetter : EntityBaseClassWithPrivateSetter
     {
-
     }
 
     public abstract class EntityBase<TPK>
@@ -56,28 +53,28 @@ namespace FluentNHibernate.Automapping.TestFixtures
     public class ExampleInheritedClass : ExampleClass
     {
         public string ExampleProperty { get; set; }
-        public int SomeNumber{ get; set; }
+        public int SomeNumber { get; set; }
         public IList<ExampleClass> Children { get; private set; }
         public ExampleParentClass Component { get; set; }
         public IDictionary DictionaryChild { get; set; }
     }
 
-	public class ExampleBaseClass
-	{
-		public virtual int Id { get; set; }
-	}
+    public class ExampleBaseClass
+    {
+        public virtual int Id { get; set; }
+    }
 
-	public class FirstInheritedClass : ExampleBaseClass
-	{
-		public string Property1 { get; set; }
-		public int PropertyAlsoOnSiblingInheritedClass { get; set; }
-	}
+    public class FirstInheritedClass : ExampleBaseClass
+    {
+        public string Property1 { get; set; }
+        public int PropertyAlsoOnSiblingInheritedClass { get; set; }
+    }
 
-	public class SecondInheritedClass : ExampleBaseClass
-	{
-		public string Property2 { get; set; }
-		public int PropertyAlsoOnSiblingInheritedClass { get; set; }
-	}
+    public class SecondInheritedClass : ExampleBaseClass
+    {
+        public string Property2 { get; set; }
+        public int PropertyAlsoOnSiblingInheritedClass { get; set; }
+    }
 
     public class ClassWithDummyProperty
     {
@@ -111,19 +108,17 @@ namespace FluentNHibernate.Automapping.TestFixtures
         public virtual int Id { get; private set; }
     }
 
-
     public enum ExampleEnum
     {
-        enum1=1
+        enum1 = 1
     }
 
     public class ExampleParentClass
     {
-        public int ExampleParentClassId { get; set; } 
+        public int ExampleParentClassId { get; set; }
         public virtual int Id { get; set; }
-        public virtual IList<ExampleClass> Examples {get; set;}
+        public virtual IList<ExampleClass> Examples { get; set; }
     }
-
 
     public class ValidTimestampClass
     {
@@ -210,7 +205,6 @@ namespace FluentNHibernate.Automapping.TestFixtures.CustomTypes
 {
     public class Custom
     {
-
     }
 
     public class DoubleString
@@ -220,13 +214,13 @@ namespace FluentNHibernate.Automapping.TestFixtures.CustomTypes
     }
 
     public class CustomTypeConvention : UserTypeConvention<CustomUserType>
-    {}
+    { }
 
     public class CustomCompositeTypeConvention : IUserTypeConvention
     {
         public void Accept(IAcceptanceCriteria<IPropertyInspector> criteria)
         {
-           criteria.Expect(x => x.Type == typeof(DoubleString));
+            criteria.Expect(x => x.Type == typeof(DoubleString));
         }
 
         public void Apply(IPropertyInstance instance)
@@ -239,7 +233,7 @@ namespace FluentNHibernate.Automapping.TestFixtures.CustomTypes
     {
         public void Accept(IAcceptanceCriteria<IPropertyInspector> criteria)
         {
-           criteria.Expect(x => x.Type == typeof(DoubleString));
+            criteria.Expect(x => x.Type == typeof(DoubleString));
         }
 
         public void Apply(IPropertyInstance instance)
@@ -267,7 +261,6 @@ namespace FluentNHibernate.Automapping.TestFixtures.CustomTypes
 
         public void NullSafeSet(IDbCommand cmd, object value, int index)
         {
-            
         }
 
         public object DeepCopy(object value)
@@ -292,7 +285,7 @@ namespace FluentNHibernate.Automapping.TestFixtures.CustomTypes
 
         public SqlType[] SqlTypes
         {
-            get { return new[] {new SqlType(DbType.String)}; }
+            get { return new[] { new SqlType(DbType.String) }; }
         }
 
         public Type ReturnedType
@@ -359,7 +352,6 @@ namespace FluentNHibernate.Automapping.TestFixtures.CustomCompositeTypes
             return (first == null && second == null) ? null : new string[] { first, second };
         }
 
-
         public void NullSafeSet(IDbCommand st, Object value, int index, ISessionImplementor session)
         {
             DoubleString ds = value as DoubleString ?? new DoubleString();
@@ -408,6 +400,11 @@ namespace FluentNHibernate.Automapping.TestFixtures.CustomCompositeTypes
         {
             return DeepCopy(original);
         }
+
+        public void NullSafeSet(IDbCommand cmd, object value, int index, bool[] settable, ISessionImplementor session)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
@@ -433,9 +430,8 @@ namespace FluentNHibernate.Automapping.TestFixtures.SuperTypes
     public class ExampleInheritedClass : ExampleClass
     {
         public string ExampleProperty { get; set; }
-        public int SomeNumber{ get; set; }
+        public int SomeNumber { get; set; }
     }
-
 
     public class ExampleClass : SuperType
     {
@@ -446,17 +442,14 @@ namespace FluentNHibernate.Automapping.TestFixtures.SuperTypes
         public ExampleParentClass Parent { get; set; }
     }
 
-
     public enum ExampleEnum
     {
-        enum1=1
+        enum1 = 1
     }
 
     public class ExampleParentClass : SuperType
     {
-        public int ExampleParentClassId { get; set; } 
-        public virtual IList<ExampleClass> Examples {get; set;}
+        public int ExampleParentClassId { get; set; }
+        public virtual IList<ExampleClass> Examples { get; set; }
     }
-
-
 }

@@ -1,12 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using FluentNHibernate.Conventions;
-using FluentNHibernate.Conventions.Instances;
-using FluentNHibernate.Mapping;
-using FluentNHibernate.MappingModel.Collections;
-using Iesi.Collections.Generic;
+// using Iesi.Collections.Generic;
 using NUnit.Framework;
 
 namespace FluentNHibernate.Testing.DomainModel.Mapping
@@ -14,7 +8,7 @@ namespace FluentNHibernate.Testing.DomainModel.Mapping
     // NOTE TO MAINTAINERS
     //
     // Most of the tests for many-to-many mapping are still located in the ClassMapXmlCreationTester
-    // MY ADVICE: 
+    // MY ADVICE:
     //    - Any time you have to ADD a test for many-to-many, add it HERE not THERE
     //    - Any time you have to MODIFY a test for many-to-many THERE, move it HERE, FIRST.
     // Thanks!  10-NOV-2008 Chad Myers
@@ -29,7 +23,7 @@ namespace FluentNHibernate.Testing.DomainModel.Mapping
         public virtual IList<string> ListOfSimpleChildren { get; set; }
         public virtual CustomCollection<ChildObject> CustomCollection { get; set; }
         public virtual IDictionary<ChildObject, ChildObject> GenericTernaryMapOfChildren { get; set; }
-        public virtual IDictionary<ChildObject, bool> MapOfChildrenToBools{ get; set; }
+        public virtual IDictionary<ChildObject, bool> MapOfChildrenToBools { get; set; }
         public virtual IDictionary NonGenericTernaryMapOfChildren { get; set; }
 
         private IList<ChildObject> otherChildren = new List<ChildObject>();
@@ -77,7 +71,6 @@ namespace FluentNHibernate.Testing.DomainModel.Mapping
                 .HasAttribute("foreign-key", "FK_Child");
         }
 
-
         [Test]
         public void Can_use_custom_collection_implicitly()
         {
@@ -119,18 +112,18 @@ namespace FluentNHibernate.Testing.DomainModel.Mapping
                 .Element("class/bag").HasAttribute("collection-type", "name");
         }
 
-		[Test]
-		public void CanSpecifyCollectionTypeAsMapWithStringColumnName()
-		{
-			new MappingTester<ManyToManyTarget>()
-				.ForMapping(map => map
-					.HasManyToMany(x => x.MapOfChildren)
+        [Test]
+        public void CanSpecifyCollectionTypeAsMapWithStringColumnName()
+        {
+            new MappingTester<ManyToManyTarget>()
+                .ForMapping(map => map
+                    .HasManyToMany(x => x.MapOfChildren)
                         .ForeignKey("ParentId")
                         .DictionaryKey("Name"))
-				.Element("class/map/key/column").HasAttribute("name", "ParentId")
-				.Element("class/map/index/column").HasAttribute("name", "Name")
-				.Element("class/map/many-to-many").HasAttribute("class", typeof(ChildObject).AssemblyQualifiedName);
-		}
+                .Element("class/map/key/column").HasAttribute("name", "ParentId")
+                .Element("class/map/index/column").HasAttribute("name", "Name")
+                .Element("class/map/many-to-many").HasAttribute("class", typeof(ChildObject).AssemblyQualifiedName);
+        }
 
         [Test]
         public void NotFound_sets_attribute()
@@ -297,7 +290,7 @@ namespace FluentNHibernate.Testing.DomainModel.Mapping
                 .ForMapping(m => m.HasManyToMany(x => x.BagOfChildren).OrderBy("foo"))
                 .Element("class/bag").HasAttribute("order-by", "foo");
         }
-      
+
         [Test]
         public void OrderByClauseIgnoredForUnorderableCollections()
         {
@@ -309,12 +302,12 @@ namespace FluentNHibernate.Testing.DomainModel.Mapping
         [Test]
         public void CanSpecifyMultipleParentKeyColumns()
         {
-              new MappingTester<ManyToManyTarget>()
-                .ForMapping(m => m.HasManyToMany(x => x.BagOfChildren)
-                    .ParentKeyColumns.Add("ID1")
-                    .ParentKeyColumns.Add("ID2"))
-                .Element("class/bag/key/column[@name='ID1']").Exists()
-                .Element("class/bag/key/column[@name='ID2']").Exists();
+            new MappingTester<ManyToManyTarget>()
+              .ForMapping(m => m.HasManyToMany(x => x.BagOfChildren)
+                  .ParentKeyColumns.Add("ID1")
+                  .ParentKeyColumns.Add("ID2"))
+              .Element("class/bag/key/column[@name='ID1']").Exists()
+              .Element("class/bag/key/column[@name='ID2']").Exists();
         }
 
         [Test]
